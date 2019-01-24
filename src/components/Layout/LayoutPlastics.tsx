@@ -19,16 +19,7 @@ const LayoutPlastics: React.SFC<{}> = ({ children }) => (
     query={graphql`
       query LayoutPlasticsQuery {
         settings: settingsYamlX(fields: { division: { eq: "plastics" } }) {
-          title
-          phone
-          email
-          logo {
-            childImageSharp {
-              fixed(width: 100, quality: 100) {
-                ...GatsbyImageSharpFixed
-              }
-            }
-          }
+          ...LayoutFragment
         }
       }
     `}

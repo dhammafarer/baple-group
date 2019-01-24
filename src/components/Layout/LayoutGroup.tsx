@@ -19,16 +19,7 @@ const LayoutGroup: React.SFC<{}> = ({ children }) => (
     query={graphql`
       query LayoutGroupQuery {
         settings: settingsYamlX(fields: { division: { eq: "group" } }) {
-          title
-          phone
-          email
-          logo {
-            childImageSharp {
-              fixed(width: 100, quality: 100) {
-                ...GatsbyImageSharpFixed
-              }
-            }
-          }
+          ...LayoutFragment
         }
       }
     `}

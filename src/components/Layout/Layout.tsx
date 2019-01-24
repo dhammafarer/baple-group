@@ -1,4 +1,5 @@
 import * as React from "react";
+import { graphql } from "gatsby";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../../theme";
 import { styled, Flex } from "primithemes";
@@ -70,3 +71,18 @@ export const Layout: React.SFC<Props> = ({
     </Root>
   </ThemeProvider>
 );
+
+export const query = graphql`
+  fragment LayoutFragment on SettingsYamlX {
+    title
+    phone
+    email
+    logo {
+      childImageSharp {
+        fixed(width: 100, quality: 100) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+  }
+`;
