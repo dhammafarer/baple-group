@@ -1,3 +1,7 @@
 title: Plastic Two
 image: /assets/uploads/logo.png
 category: Pulverizadores
+markdown: description
+spec:
+  - key: name
+    value: 400ml
