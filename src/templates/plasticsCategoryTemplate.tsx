@@ -4,22 +4,39 @@ import { graphql } from "gatsby";
 import { styled, Box } from "primithemes";
 
 const Table = styled.table`
+  font-family: ${props => props.theme.fonts.sans};
   border-collapse: collapse;
   width: 100%;
+  & thead {
+    border-bottom: 2px solid ${props => props.theme.colors.primary.main};
+  }
   & th,
   td {
     padding: ${props => props.theme.sizes[2]};
     background: transparent;
     text-align: left;
   }
+  & th {
+    font-size: ${props => props.theme.fontSizes[3]};
+    color: ${props => props.theme.colors.text.main};
+  }
+  & td {
+    color: ${props => props.theme.colors.text.dark};
+    width: 50%;
+  }
+  & tr:nth-child(even) {
+    background: ${props => props.theme.colors.background.main};
+  }
   & tr {
     border: 1px solid;
     border-left: none;
     border-right: none;
+    border-top: none;
     border-color: ${props => props.theme.colors.divider.main};
-  }
-  & tr:nth-child(even) {
-    background: ${props => props.theme.colors.divider.light};
+    transition: all 400ms ease-out;
+    &: hover {
+      background: ${props => props.theme.colors.divider.light};
+    }
   }
 `;
 
