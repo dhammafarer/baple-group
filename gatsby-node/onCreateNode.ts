@@ -95,5 +95,15 @@ export const onCreateNode: GatsbyOnCreateNode = ({
       const slug = `/${pageName}`;
       createNodeField({ node, name: "slug", value: slug });
     }
+
+    if (sourceInstanceName === "productCategories") {
+      const slug = `/${name}`;
+      createNodeField({ node, name: "slug", value: slug });
+    }
+
+    if (sourceInstanceName === "products") {
+      const slug = `/${node.category}/${name}`;
+      createNodeField({ node, name: "slug", value: slug });
+    }
   }
 };
