@@ -80,7 +80,7 @@ export const onCreateNode: GatsbyOnCreateNode = ({
     }
   }
 
-  if (node.internal.type === "SettingsYaml") {
+  if (node.internal.type === "SettingsYamlX") {
     const [, division] = getNode(node.parent).name.split(".");
     createNodeField({ node, name: "division", value: division });
   }
