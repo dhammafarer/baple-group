@@ -1,8 +1,17 @@
 import * as React from "react";
+import { graphql } from "gatsby";
 import { LayoutGroup } from "../components/Layout";
 import { Flex, Text } from "primithemes";
 
-const IndexPage: React.SFC<{}> = () => {
+interface Props {
+  data: {
+    content: {
+      title: string;
+    };
+  };
+}
+
+const IndexPage: React.SFC<Props> = ({ data: { content } }) => {
   return (
     <LayoutGroup>
       <Flex
@@ -12,7 +21,7 @@ const IndexPage: React.SFC<{}> = () => {
         alignItems="center"
       >
         <Text m={3} is="h1" fontSize={[6, 6, 7]} color="secondary.main">
-          Index
+          {content.title}
         </Text>
         <Text is="h2" color="text.main">
           Not Found
@@ -23,3 +32,11 @@ const IndexPage: React.SFC<{}> = () => {
 };
 
 export default IndexPage;
+
+export const query = graphql`
+  query {
+    content: groupContentYamlX(fields: { slug: { eq: "/" } }) {
+      title
+    }
+  }
+`;

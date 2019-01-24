@@ -28,7 +28,7 @@ export const onCreateNode: GatsbyOnCreateNode = ({
   }
 
   // Create Content nodes
-  if (node.internal.type === "ContentYaml") {
+  if (node.internal.owner === "gatsby-transformer-yaml") {
     const { id, parent, children, internal, ...nodeContent } = Object.assign(
       {},
       node
@@ -39,22 +39,22 @@ export const onCreateNode: GatsbyOnCreateNode = ({
     };
 
     const { absolutePath, name } = getNode(parent);
-    const [pageName, lang] = name.split(".");
+    const [division, pageName] = name.split(".");
 
     const content = Object.assign(
       processStringProperties(
         [fn, replaceAssetPath(absolutePath)],
         nodeContent
       ),
-      { name: pageName, lang }
+      { pageName, division }
     );
 
     const nodeMeta = {
       id: createNodeId(`${node.id}-content`),
-      parent: node.id,
+      parent: node.parent,
       children: [],
       internal: {
-        type: `Content`,
+        type: node.internal.type + "X",
         content: JSON.stringify(content),
         contentDigest: createContentDigest(content),
       },
@@ -79,19 +79,21 @@ export const onCreateNode: GatsbyOnCreateNode = ({
       });
     }
   }
+
   if (node.internal.type === "SettingsYaml") {
     const [, division] = getNode(node.parent).name.split(".");
     createNodeField({ node, name: "division", value: division });
   }
 
-  if (node.internal.type === "Content") {
-    const slug = `/${node.name === "index" ? "" : node.name}`;
-
-    createNodeField({ node, name: "slug", value: slug });
-    createNodeField({
-      node,
-      name: "template",
-      value: `/${node.template || node.name}PageTemplate.tsx`,
-    });
+  if (node.internal.type.match(/YamlX$/)) {
+    const { sourceInstanceName, name } = getNode(node.parent);
+    if (sourceInstanceName === "content") {
+      const pageName = name
+        .split(".")
+        .map((s: string) => (s === "index" ? "" : s))
+        .join("/");
+      const slug = `/${pageName}`;
+      createNodeField({ node, name: "slug", value: slug });
+    }
   }
 };
