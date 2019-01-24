@@ -34,14 +34,14 @@ const LayoutPlastics: React.SFC<{}> = ({ children }) => (
       }
     `}
     render={(data: Data) => {
-      const { logo, email, phone, title } = data.settings;
+      const { email, phone, title } = data.settings;
       return (
         <Layout
           navItems={navItems}
           title={title}
           phone={phone}
           email={email}
-          logo={logo}
+          logo={data.logo}
         >
           {children}
         </Layout>
