@@ -1,5 +1,6 @@
 import * as React from "react";
 import { styled, Box, Card, Text, Flex } from "primithemes";
+import { Link } from "../../Link";
 
 const Main = styled(Card)`
   position: relative;
@@ -18,9 +19,17 @@ interface Props {
   phone?: React.ReactNode;
   email?: React.ReactNode;
   address?: React.ReactNode[];
+  divisions: { to: string; label: string }[];
 }
 
-const Footer: React.SFC<Props> = ({ logo, title, phone, email, address }) => (
+const Footer: React.SFC<Props> = ({
+  divisions,
+  logo,
+  title,
+  phone,
+  email,
+  address,
+}) => (
   <Box is="footer">
     <Main
       bg="text.dark"
@@ -70,6 +79,17 @@ const Footer: React.SFC<Props> = ({ logo, title, phone, email, address }) => (
         </Flex>
       </MainInner>
     </Main>
+    <Flex justifyContent="center" w={1} bg="black.dark">
+      {divisions.map(x => (
+        <Box p={2}>
+          <Link to={x.to} key={x.to}>
+            <Box p={2}>
+              <Text color="text.contrast">{x.label}</Text>
+            </Box>
+          </Link>
+        </Box>
+      ))}
+    </Flex>
     <Flex bg="black.main" p={3} justifyContent="center">
       <Text color="grey.600" fontSize={1}>
         © 2018 Copyright:{" "}

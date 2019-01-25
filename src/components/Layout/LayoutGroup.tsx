@@ -7,24 +7,19 @@ const LayoutGroup: React.SFC<{}> = ({ children }) => (
     query={graphql`
       query LayoutGroupQuery {
         settings: settingsYamlX(fields: { slug: { eq: "/" } }) {
-          ...LayoutFragment
+          ...LayoutSettingsFragment
+        }
+        divisions: allSettingsYamlX {
+          edges {
+            node {
+              ...LayoutDivisionsFragment
+            }
+          }
         }
       }
     `}
     render={(data: LayoutData) => {
-      const { fields, nav, logo, email, phone, title } = data.settings;
-      return (
-        <Layout
-          navItems={nav}
-          title={title}
-          phone={phone}
-          email={email}
-          logo={logo}
-          home={fields.slug}
-        >
-          {children}
-        </Layout>
-      );
+      return <Layout data={data}>{children}</Layout>;
     }}
   />
 );

@@ -10,6 +10,15 @@ import { Head } from "./Head";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 
+interface DivisionNode {
+  node: {
+    title: string;
+    fields: {
+      slug: string;
+    };
+  };
+}
+
 interface LayoutData {
   settings: {
     title: string;
@@ -20,6 +29,9 @@ interface LayoutData {
     fields: {
       slug: string;
     };
+  };
+  divisions: {
+    edges: DivisionNode[];
   };
 }
 
@@ -56,39 +68,42 @@ const Main = styled(Flex)`
 `;
 
 interface Props {
-  logo: any;
-  title: string;
-  email: string;
-  phone: string;
-  navItems: any[];
-  home: string;
+  data: LayoutData;
 }
 
 export const Layout: React.SFC<Props> = ({
   children,
-  title,
-  logo,
-  email,
-  phone,
-  navItems,
-  home,
+  data: { settings, divisions },
 }) => (
   <ThemeProvider theme={theme}>
     <Root>
       <Normalize />
       <GlobalStyle />
-      <Head title={title} />
+      <Head title={settings.title} />
       <Content bg="background.main">
-        <Header home={home} title={title} navItems={navItems} logo={logo} />
+        <Header
+          home={settings.fields.slug}
+          title={settings.title}
+          navItems={settings.nav}
+          logo={settings.logo}
+        />
         <Main>{children}</Main>
-        <Footer email={email} phone={phone} title={title} />
+        <Footer
+          divisions={divisions.edges.map(({ node }) => ({
+            to: node.fields.slug,
+            label: node.title,
+          }))}
+          email={settings.email}
+          phone={settings.phone}
+          title={settings.title}
+        />
       </Content>
     </Root>
   </ThemeProvider>
 );
 
 export const query = graphql`
-  fragment LayoutFragment on SettingsYamlX {
+  fragment LayoutSettingsFragment on SettingsYamlX {
     fields {
       slug
     }
@@ -106,6 +121,13 @@ export const query = graphql`
         }
       }
     }
+  }
+
+  fragment LayoutDivisionsFragment on SettingsYamlX {
+    fields {
+      slug
+    }
+    title
   }
 `;
 
