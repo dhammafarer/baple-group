@@ -14,11 +14,11 @@ interface Data {
 
 const navItems: NavItem[] = [{ to: "/home", label: "Home" }];
 
-const LayoutPlastics: React.SFC<{}> = ({ children }) => (
+const LayoutEngineering: React.SFC<{}> = ({ children }) => (
   <StaticQuery
     query={graphql`
-      query LayoutPlasticsQuery {
-        settings: settingsYamlX(fields: { slug: { eq: "/plastics" } }) {
+      query LayoutEngineeringQuery {
+        settings: settingsYamlX(fields: { slug: { eq: "/engineering" } }) {
           ...LayoutFragment
         }
       }
@@ -40,4 +40,4 @@ const LayoutPlastics: React.SFC<{}> = ({ children }) => (
   />
 );
 
-export { LayoutPlastics };
+export { LayoutEngineering };

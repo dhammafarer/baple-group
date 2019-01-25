@@ -18,7 +18,7 @@ const LayoutGroup: React.SFC<{}> = ({ children }) => (
   <StaticQuery
     query={graphql`
       query LayoutGroupQuery {
-        settings: settingsYamlX(fields: { division: { eq: "group" } }) {
+        settings: settingsYamlX(fields: { slug: { eq: "/" } }) {
           ...LayoutFragment
         }
       }

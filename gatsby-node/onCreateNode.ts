@@ -80,14 +80,10 @@ export const onCreateNode: GatsbyOnCreateNode = ({
     }
   }
 
-  if (node.internal.type === "SettingsYamlX") {
-    const [, division] = getNode(node.parent).name.split(".");
-    createNodeField({ node, name: "division", value: division });
-  }
-
   if (node.internal.type.match(/YamlX$/)) {
     const { sourceInstanceName, name } = getNode(node.parent);
-    if (sourceInstanceName === "content") {
+
+    if (contains(sourceInstanceName, ["content", "settings"])) {
       const pageName = name
         .split(".")
         .map((s: string) => (s === "index" ? "" : s))
@@ -97,7 +93,7 @@ export const onCreateNode: GatsbyOnCreateNode = ({
     }
 
     if (sourceInstanceName === "productCategories") {
-      const slug = `/${name}`;
+      const slug = `${node.path}`;
       createNodeField({ node, name: "slug", value: slug });
     }
 
