@@ -25,6 +25,7 @@ interface DrawerMenuProps {
 }
 
 const DrawerMenu: React.SFC<DrawerMenuProps> = ({ logo, title, navItems }) => {
+  console.log(logo);
   return (
     <MakeMenu>
       {injected => (
@@ -43,9 +44,9 @@ const DrawerMenu: React.SFC<DrawerMenuProps> = ({ logo, title, navItems }) => {
                 <CloseButton onClick={injected.handleClose} />
               </Flex>
               {logo && (
-                <Flex justifyContent="center" my={3}>
+                <Flex w={1} justifyContent="center" my={3}>
                   <Link to="/" onClick={injected.handleClose}>
-                    <Logo critical fixed={logo} />
+                    <Logo style={{ width: "120px" }} critical fluid={logo} />
                   </Link>
                 </Flex>
               )}

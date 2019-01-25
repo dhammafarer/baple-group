@@ -81,7 +81,7 @@ const Footer: React.SFC<Props> = ({
         </Flex>
       </MainInner>
     </Main>
-    <Flex justifyContent="center" w={1} bg="black.dark">
+    <Flex flexWrap="wrap" justifyContent="center" w={1} bg="black.dark">
       {divisions.map(x => (
         <Box p={2}>
           <Link to={x.to} key={x.to}>
