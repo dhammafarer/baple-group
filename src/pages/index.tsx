@@ -3,13 +3,16 @@ import { graphql } from "gatsby";
 import { LayoutGroup } from "../components/Layout";
 import { Box, Flex, Text, Card } from "primithemes";
 import { Link } from "../components/Link";
+import { Image } from "../components/Image";
+import { Container } from "../components/Container";
 
 interface DivisionNode {
   node: {
-    title: string;
     fields: {
       slug: string;
     };
+    title: string;
+    logo: any;
   };
 }
 interface Props {
@@ -38,17 +41,20 @@ const IndexPage: React.SFC<Props> = ({ data: { content, divisions } }) => {
         <Text is="h2" color="text.main">
           Not Found
         </Text>
-        <Flex>
-          {divisions.edges.map(({ node }) => (
-            <Box p={2} key={node.fields.slug}>
-              <Link to={node.fields.slug}>
-                <Card p={2} shadow={2} radius={2}>
-                  <div>{node.title}</div>
-                </Card>
-              </Link>
-            </Box>
-          ))}
-        </Flex>
+        <Container>
+          <Flex w={1}>
+            {divisions.edges.map(({ node }) => (
+              <Box w={1 / 4} p={2} key={node.fields.slug}>
+                <Link to={node.fields.slug}>
+                  <Card w={1} p={2} shadow={2} radius={2}>
+                    <Image fluid={node.logo} />
+                    <div>{node.title}</div>
+                  </Card>
+                </Link>
+              </Box>
+            ))}
+          </Flex>
+        </Container>
       </Flex>
     </LayoutGroup>
   );
@@ -64,9 +70,16 @@ export const query = graphql`
     divisions: allSettingsYamlX(filter: { fields: { slug: { ne: "/" } } }) {
       edges {
         node {
-          title
           fields {
             slug
+          }
+          title
+          logo {
+            childImageSharp {
+              fluid(maxWidth: 250) {
+                ...GatsbyImageSharpFluid
+              }
+            }
           }
         }
       }
