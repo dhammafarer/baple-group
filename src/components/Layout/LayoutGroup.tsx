@@ -1,18 +1,6 @@
 import * as React from "react";
-import { Layout } from "./Layout";
+import { Layout, LayoutData } from "./Layout";
 import { StaticQuery, graphql } from "gatsby";
-import { NavItem } from "./Header";
-
-interface Data {
-  settings: {
-    title: string;
-    phone: string;
-    email: string;
-    logo: any;
-  };
-}
-
-const navItems: NavItem[] = [{ to: "/home", label: "Home" }];
 
 const LayoutGroup: React.SFC<{}> = ({ children }) => (
   <StaticQuery
@@ -23,11 +11,11 @@ const LayoutGroup: React.SFC<{}> = ({ children }) => (
         }
       }
     `}
-    render={(data: Data) => {
-      const { logo, email, phone, title } = data.settings;
+    render={(data: LayoutData) => {
+      const { nav, logo, email, phone, title } = data.settings;
       return (
         <Layout
-          navItems={navItems}
+          navItems={nav}
           title={title}
           phone={phone}
           email={email}

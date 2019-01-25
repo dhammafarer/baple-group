@@ -10,6 +10,16 @@ import { Head } from "./Head";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 
+interface LayoutData {
+  settings: {
+    title: string;
+    phone: string;
+    email: string;
+    logo: any;
+    nav: { to: string; label: string }[];
+  };
+}
+
 const GlobalStyle = createGlobalStyle`
   body {
     overflow-y: scroll;
@@ -75,6 +85,10 @@ export const Layout: React.SFC<Props> = ({
 export const query = graphql`
   fragment LayoutFragment on SettingsYamlX {
     title
+    nav {
+      to
+      label
+    }
     phone
     email
     logo {
@@ -86,3 +100,5 @@ export const query = graphql`
     }
   }
 `;
+
+export { LayoutData };
