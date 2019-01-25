@@ -49,9 +49,10 @@ interface HeaderProps {
   logo?: any;
   title: React.ReactNode;
   navItems: NavItem[];
+  home: string;
 }
 
-const Header: React.SFC<HeaderProps> = ({ logo, title, navItems }) => (
+const Header: React.SFC<HeaderProps> = ({ home, logo, title, navItems }) => (
   <Wrapper
     bg="white.light"
     p={3}
@@ -60,7 +61,7 @@ const Header: React.SFC<HeaderProps> = ({ logo, title, navItems }) => (
     justifyContent="space-between"
     shadow={1}
   >
-    <Link to="/">
+    <Link to={home}>
       <Brand alignItems="center">
         {logo && (
           <LogoWrapper alignItems="center">

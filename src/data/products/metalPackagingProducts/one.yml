@@ -1,0 +1,11 @@
+title: Plastic One
+image: /assets/uploads/logo.png
+category: Sprays
+markdown: some description
+spec:
+  - key: type
+    value: box
+  - key: capacity
+    value: 400ml
+  - key: weight
+    value: 4kg

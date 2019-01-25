@@ -17,6 +17,9 @@ interface LayoutData {
     email: string;
     logo: any;
     nav: { to: string; label: string }[];
+    fields: {
+      slug: string;
+    };
   };
 }
 
@@ -58,6 +61,7 @@ interface Props {
   email: string;
   phone: string;
   navItems: any[];
+  home: string;
 }
 
 export const Layout: React.SFC<Props> = ({
@@ -67,6 +71,7 @@ export const Layout: React.SFC<Props> = ({
   email,
   phone,
   navItems,
+  home,
 }) => (
   <ThemeProvider theme={theme}>
     <Root>
@@ -74,7 +79,7 @@ export const Layout: React.SFC<Props> = ({
       <GlobalStyle />
       <Head title={title} />
       <Content bg="background.main">
-        <Header title={title} navItems={navItems} logo={logo} />
+        <Header home={home} title={title} navItems={navItems} logo={logo} />
         <Main>{children}</Main>
         <Footer email={email} phone={phone} title={title} />
       </Content>
@@ -84,6 +89,9 @@ export const Layout: React.SFC<Props> = ({
 
 export const query = graphql`
   fragment LayoutFragment on SettingsYamlX {
+    fields {
+      slug
+    }
     title
     nav {
       to

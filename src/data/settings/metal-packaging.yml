@@ -5,3 +5,5 @@ logo: /assets/uploads/logo.png
 nav:
   - to: "/metal-packaging"
     label: "Home"
+  - to: "/metal-packaging/products"
+    label: "Products"

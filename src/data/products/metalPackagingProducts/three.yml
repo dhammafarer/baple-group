@@ -1,0 +1,7 @@
+title: Plastic Three
+image: /assets/uploads/logo.png
+category: Sprays
+markdown: description
+spec:
+  - key: name
+    value: 400ml

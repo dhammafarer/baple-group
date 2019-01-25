@@ -12,7 +12,7 @@ const LayoutEngineering: React.SFC<{}> = ({ children }) => (
       }
     `}
     render={(data: LayoutData) => {
-      const { nav, logo, email, phone, title } = data.settings;
+      const { fields, nav, logo, email, phone, title } = data.settings;
       return (
         <Layout
           navItems={nav}
@@ -20,6 +20,7 @@ const LayoutEngineering: React.SFC<{}> = ({ children }) => (
           phone={phone}
           email={email}
           logo={logo}
+          home={fields.slug}
         >
           {children}
         </Layout>
