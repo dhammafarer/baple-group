@@ -1,6 +1,7 @@
 import * as React from "react";
 import { styled, Box, Card, Text, Flex } from "primithemes";
 import { Link } from "../../Link";
+import { Image } from "../../Image";
 
 const Main = styled(Card)`
   position: relative;
@@ -45,10 +46,11 @@ const Footer: React.SFC<Props> = ({
         flexDirection="column"
       >
         {logo && (
-          <Flex style={{ opacity: 0.9 }} w={["220px"]}>
-            <img
+          <Flex style={{ opacity: 0.9 }} w={["120px"]}>
+            <Image
+              critical
               style={{ width: "100%", height: "100%" }}
-              src={logo.childImageSharp.fixed.src}
+              fluid={logo}
             />
           </Flex>
         )}

@@ -31,7 +31,7 @@ export const LogoWrapper = styled(Flex)`
 `;
 
 export const Logo = styled.img`
-  width: 100%;
+  width: 56px;
 `;
 export const BrandName = styled(Text)`
   display: none;
@@ -65,7 +65,7 @@ const Header: React.SFC<HeaderProps> = ({ home, logo, title, navItems }) => (
       <Brand alignItems="center">
         {logo && (
           <LogoWrapper alignItems="center">
-            <Logo src={logo.childImageSharp.fixed.src} />
+            <Logo src={logo.childImageSharp.fluid.src} />
           </LogoWrapper>
         )}
         <BrandName color="primary.main" fontSize={3} ml={3}>

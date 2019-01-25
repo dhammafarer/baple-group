@@ -94,6 +94,7 @@ export const Layout: React.SFC<Props> = ({
             label: node.title,
           }))}
           email={settings.email}
+          logo={settings.logo}
           phone={settings.phone}
           title={settings.title}
         />
@@ -116,8 +117,8 @@ export const query = graphql`
     email
     logo {
       childImageSharp {
-        fixed(width: 100, quality: 100) {
-          ...GatsbyImageSharpFixed
+        fluid(maxWidth: 100, quality: 100) {
+          ...GatsbyImageSharpFluid
         }
       }
     }
